@@ -35,11 +35,15 @@ internal static class DarkTitleBar
         {
             IntPtr hwnd = new WindowInteropHelper(window).Handle;
             int useDarkMode = 1;
-            DwmSetWindowAttribute(hwnd, DwmwaUseImmersiveDarkMode, ref useDarkMode, sizeof(int));
+            int hresult = DwmSetWindowAttribute(hwnd, DwmwaUseImmersiveDarkMode, ref useDarkMode, sizeof(int));
+            if (hresult != 0)
+            {
+                // Older Windows builds without this DWM attribute return a failure HRESULT here - just leave the title bar as-is
+            }
         }
         catch (Exception)
         {
-            // Older Windows builds without this DWM attribute, or any other failure here, just leave the title bar as-is
+            // Any other failure here (e.g. the DWM API itself being unavailable) - just leave the title bar as-is
         }
     }
 }
