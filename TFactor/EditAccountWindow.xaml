@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TFactor"
         mc:Ignorable="d"
-        Title="Edit Account" Height="280" Width="340"
+        Title="Edit Account" Height="250" Width="340"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         Background="{StaticResource Brush.Background}">
     <StackPanel Margin="16">
