@@ -62,7 +62,7 @@
                                 <TextBlock Text="{Binding SecondsRemaining, StringFormat={}{0}s}"
                                            HorizontalAlignment="Center"
                                            FontSize="12"
-                                           Foreground="{StaticResource Brush.TextTeal}" />
+                                           Foreground="{Binding SecondsRemaining, Converter={StaticResource SecondsRemainingToBrushConverter}}" />
                                 <Button Width="32"
                                         Height="32"
                                         Tag="{Binding}"
