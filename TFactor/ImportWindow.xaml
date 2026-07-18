@@ -11,9 +11,10 @@
         <TextBlock DockPanel.Dock="Top"
                     TextWrapping="Wrap"
                     Margin="0,0,0,12"
-                    Text="Choose either a single account's QR code or Google Authenticator's 'Transfer accounts' export QR code." />
+                    Text="Choose either a single account's QR code or Google Authenticator's 'Transfer accounts' export QR code. If your export used more than one QR code, choose each screenshot in turn - they'll all be added below." />
 
-        <Button DockPanel.Dock="Top"
+        <Button x:Name="ChooseFileButton"
+                DockPanel.Dock="Top"
                 Content="Choose Screenshot..."
                 Padding="10,5"
                 HorizontalAlignment="Left"
@@ -23,6 +24,13 @@
         <TextBlock x:Name="ErrorTextBlock"
                     DockPanel.Dock="Top"
                     Foreground="Red"
+                    TextWrapping="Wrap"
+                    Margin="0,0,0,12"
+                    Visibility="Collapsed" />
+
+        <TextBlock x:Name="StatusTextBlock"
+                    DockPanel.Dock="Top"
+                    Foreground="#1A5FB4"
                     TextWrapping="Wrap"
                     Margin="0,0,0,12"
                     Visibility="Collapsed" />

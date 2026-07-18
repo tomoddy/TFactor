@@ -10,12 +10,12 @@ namespace TFactor.Services;
 public static class GoogleAuthMigration
 {
     /// <summary>
-    /// Parses an "otpauth-migration://offline?data=..." URI into a list of accounts.
+    /// Parses an "otpauth-migration://offline?data=..." URI into a batch of accounts. When a Google Authenticator export has too many accounts for one QR code, it's split across several QR codes ("batches") - the returned BatchIndex/BatchSize tell the caller whether this is one of several and more screenshots are needed.
     /// </summary>
     /// <param name="migrationUri">The full URI decoded from the export QR code</param>
-    /// <returns>The accounts contained in the export</returns>
+    /// <returns>The accounts found in this batch, plus which batch this is out of how many</returns>
     /// <exception cref="FormatException">Thrown when the URI is not a valid migration payload.</exception>
-    public static List<Account> Parse(string migrationUri)
+    public static MigrationBatch Parse(string migrationUri)
     {
         // Pull the "data" query parameter out of the otpauth-migration:// URI
         Uri uri = new(migrationUri);
@@ -31,34 +31,45 @@ public static class GoogleAuthMigration
     }
 
     /// <summary>
-    /// Parses the top-level MigrationPayload protobuf message, extracting each repeated OtpParameters entry.
+    /// Parses the top-level MigrationPayload protobuf message, extracting each repeated OtpParameters entry along with the batch_index/batch_size fields used when an export spans multiple QR codes.
     /// </summary>
     /// <param name="payload">The raw protobuf bytes</param>
-    /// <returns>The accounts contained in the payload</returns>
-    private static List<Account> ParsePayload(byte[] payload)
+    /// <returns>The accounts found in this batch, plus which batch this is out of how many</returns>
+    private static MigrationBatch ParsePayload(byte[] payload)
     {
-        // Loop through the payload, reading each field tag and dispatching to the appropriate handler
+        // Loop through the payload, reading each field tag and dispatching to the appropriate handler. batch_size defaults to 1 (single QR code export) if the field is absent.
         List<Account> accounts = [];
+        int batchIndex = 0;
+        int batchSize = 1;
         int pos = 0;
         while (pos < payload.Length)
         {
             // Read the next field tag (field number + wire type)
             (int fieldNumber, int wireType) = ProtoReader.ReadTag(payload, ref pos);
 
-            // Field 1 on MigrationPayload is the repeated "otp_parameters" message
-            if (fieldNumber == 1 && wireType == ProtoReader.WireTypeLengthDelimited)
+            switch (fieldNumber)
             {
-                byte[] entry = ProtoReader.ReadLengthDelimited(payload, ref pos);
-                accounts.Add(ParseOtpParameters(entry));
-            }
-            else
-            {
-                ProtoReader.SkipField(payload, ref pos, wireType);
+                case 1 when wireType == ProtoReader.WireTypeLengthDelimited: // repeated otp_parameters
+                    byte[] entry = ProtoReader.ReadLengthDelimited(payload, ref pos);
+                    accounts.Add(ParseOtpParameters(entry));
+                    break;
+
+                case 3: // batch_size - how many QR codes the full export was split across
+                    batchSize = (int)ProtoReader.ReadVarint(payload, ref pos);
+                    break;
+
+                case 4: // batch_index - which of those QR codes this one is (0-based)
+                    batchIndex = (int)ProtoReader.ReadVarint(payload, ref pos);
+                    break;
+
+                default:
+                    ProtoReader.SkipField(payload, ref pos, wireType);
+                    break;
             }
         }
 
-        // Return the list of accounts we found
-        return accounts;
+        // Return the accounts found in this batch, plus the batch position
+        return new MigrationBatch(accounts, batchIndex, batchSize);
     }
 
     /// <summary>
