@@ -59,106 +59,35 @@
 
     <!-- ===================== Buttons ===================== -->
 
-    <!-- Default/secondary button: light blue fill with a red highlight on hover/press, used for Cancel, Choose Screenshot, per-row Edit, etc. -->
+    <!-- Every button in the app is icon-only now, sized by whatever Width/Height each Button element sets - so this is just a transparent, borderless frame that lets the icon fill the whole thing, with a subtle opacity dip for hover/press feedback instead of a background fill. -->
     <Style TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource Brush.AccentBlue}" />
-        <Setter Property="Foreground" Value="{StaticResource Brush.Background}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Brush.AccentBlue}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="FontSize" Value="13" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Bd"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="6"
-                            SnapsToDevicePixels="True">
-                        <!-- Explicitly render the caption as a TextBlock with Foreground bound as a local value, rather than relying on any style to color it - a directly-set/bound value always wins over any style, so this can't lose to the app-wide TextBlock style the way the button caption previously did. -->
-                        <ContentPresenter Margin="{TemplateBinding Padding}"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center">
-                            <ContentPresenter.ContentTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding}" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
-                                </DataTemplate>
-                            </ContentPresenter.ContentTemplate>
-                        </ContentPresenter>
+                    <Border Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <ContentPresenter x:Name="Cp"
+                                           Margin="{TemplateBinding Padding}"
+                                           HorizontalAlignment="Stretch"
+                                           VerticalAlignment="Stretch" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource Brush.AccentPink}" />
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource Brush.AccentPink}" />
+                            <Setter TargetName="Cp" Property="Opacity" Value="0.75" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource Brush.AccentPinkPressed}" />
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource Brush.AccentPinkPressed}" />
+                            <Setter TargetName="Cp" Property="Opacity" Value="0.55" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Bd" Property="Opacity" Value="0.5" />
+                            <Setter TargetName="Cp" Property="Opacity" Value="0.35" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
-
-    <!-- Accent button: same light-blue-fill/red-highlight treatment, used for the primary action in each window (Save, Import Selected, Add Account). Bolder weight to stand out as the primary action. -->
-    <Style x:Key="AccentButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-        <Setter Property="FontWeight" Value="SemiBold" />
-    </Style>
-
-    <!-- Destructive button: solid pink fill, dark background-colored text like the other buttons - used for "Remove Account". -->
-    <Style x:Key="DestructiveButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource Brush.AccentPink}" />
-        <Setter Property="Foreground" Value="{StaticResource Brush.Background}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Brush.AccentPink}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="FontSize" Value="13" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border x:Name="Bd"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="6"
-                            SnapsToDevicePixels="True">
-                        <ContentPresenter Margin="{TemplateBinding Padding}"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center">
-                            <ContentPresenter.ContentTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding}" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
-                                </DataTemplate>
-                            </ContentPresenter.ContentTemplate>
-                        </ContentPresenter>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource Brush.AccentPinkHover}" />
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource Brush.AccentPinkHover}" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource Brush.AccentPinkPressed}" />
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource Brush.AccentPinkPressed}" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Bd" Property="Opacity" Value="0.5" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- Small per-row action button, e.g. the "Edit" button on each account row. -->
-    <Style x:Key="RowButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-        <Setter Property="FontSize" Value="10" />
-        <Setter Property="Padding" Value="6,2" />
     </Style>
 
     <!-- ===================== TextBox ===================== -->

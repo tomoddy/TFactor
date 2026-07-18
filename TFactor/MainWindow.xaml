@@ -11,12 +11,16 @@
     <DockPanel Margin="12">
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
             <Button x:Name="AddAccountButton"
-                    Content="Add Account"
-                    Padding="10,5"
+                    Width="32"
+                    Height="32"
                     Margin="0,0,8,0"
-                    Style="{StaticResource AccentButton}"
-                    Click="AddAccount_Click" />
-            <Button x:Name="ImportButton" Content="Import from Screenshot" Padding="10,5" Click="ImportFromScreenshot_Click" />
+                    ToolTip="Add Account"
+                    Click="AddAccount_Click">
+                <Image Source="Icons/add.png" Stretch="Uniform" />
+            </Button>
+            <Button x:Name="ImportButton" Width="32" Height="32" ToolTip="Import from Screenshot" Click="ImportFromScreenshot_Click">
+                <Image Source="Icons/import.png" Stretch="Uniform" />
+            </Button>
         </StackPanel>
 
         <TextBlock x:Name="EmptyMessage"
@@ -56,11 +60,15 @@
                                            HorizontalAlignment="Center"
                                            FontSize="12"
                                            Foreground="{StaticResource Brush.TextSecondary}" />
-                                <Button Content="Edit"
+                                <Button Width="20"
+                                        Height="20"
                                         Tag="{Binding}"
                                         Click="EditAccount_Click"
                                         Margin="0,6,0,0"
-                                        Style="{StaticResource RowButton}" />
+                                        HorizontalAlignment="Center"
+                                        ToolTip="Edit">
+                                    <Image Source="Icons/edit.png" Stretch="Uniform" />
+                                </Button>
                             </StackPanel>
                         </Grid>
                     </Border>

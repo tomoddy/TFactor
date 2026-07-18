@@ -28,15 +28,21 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0"
-                    Content="Remove Account"
-                    Padding="12,5"
+                    Width="32"
+                    Height="32"
                     HorizontalAlignment="Left"
-                    Style="{StaticResource DestructiveButton}"
-                    Click="Remove_Click" />
+                    ToolTip="Remove Account"
+                    Click="Remove_Click">
+                <Image Source="Icons/delete.png" Stretch="Uniform" />
+            </Button>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button Content="Cancel" Padding="12,5" Margin="0,0,8,0" Click="Cancel_Click" />
-                <Button Content="Save" Padding="12,5" Style="{StaticResource AccentButton}" Click="Save_Click" IsDefault="True" />
+                <Button Width="32" Height="32" Margin="0,0,8,0" ToolTip="Cancel" Click="Cancel_Click">
+                    <Image Source="Icons/cancel.png" Stretch="Uniform" />
+                </Button>
+                <Button Width="32" Height="32" ToolTip="Save" Click="Save_Click" IsDefault="True">
+                    <Image Source="Icons/save.png" Stretch="Uniform" />
+                </Button>
             </StackPanel>
         </Grid>
     </StackPanel>

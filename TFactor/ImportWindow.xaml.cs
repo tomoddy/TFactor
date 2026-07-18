@@ -115,7 +115,7 @@ public partial class ImportWindow : Window
         }
 
         ImportButton.IsEnabled = _candidates.Count > 0;
-        ChooseFileButton.Content = "Choose Another Screenshot...";
+        ChooseFileButton.ToolTip = "Choose Another Screenshot...";
     }
 
     /// <summary>
