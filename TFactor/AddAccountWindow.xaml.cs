@@ -26,8 +26,6 @@ public partial class AddAccountWindow : Window
     /// <summary>
     /// Validates the form, builds the Account, and closes the dialog with a successful result.
     /// </summary>
-    /// <param name="sender">The sender of the event.</param>
-    /// <param name="e">The event arguments.</param>
     private void Save_Click(object sender, RoutedEventArgs e)
     {
         // Get the secret key from the input field and validate it
@@ -68,8 +66,6 @@ public partial class AddAccountWindow : Window
     /// <summary>
     /// Closes the dialog without creating an account.
     /// </summary>
-    /// <param name="sender">The sender of the event.</param>
-    /// <param name="e">The event arguments.</param>
     private void Cancel_Click(object sender, RoutedEventArgs e)
     {
         DialogResult = false;

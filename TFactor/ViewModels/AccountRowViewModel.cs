@@ -80,6 +80,15 @@ public class AccountRowViewModel : INotifyPropertyChanged
     }
 
     /// <summary>
+    /// Notifies the UI that the underlying account's Issuer/Label were changed elsewhere (e.g. via the edit dialog), so bound controls refresh.
+    /// </summary>
+    public void NotifyDetailsChanged()
+    {
+        OnPropertyChanged(nameof(Issuer));
+        OnPropertyChanged(nameof(Label));
+    }
+
+    /// <summary>
     /// Occurs when a property value changes, allowing the UI to update bindings.
     /// </summary>
     public event PropertyChangedEventHandler? PropertyChanged;

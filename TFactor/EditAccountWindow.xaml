@@ -1,0 +1,42 @@
+<Window x:Class="TFactor.EditAccountWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TFactor"
+        mc:Ignorable="d"
+        Title="Edit Account" Height="280" Width="340"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <StackPanel Margin="16">
+        <TextBlock Text="Issuer" FontWeight="Bold" Margin="0,0,0,4" />
+        <TextBox x:Name="IssuerTextBox" Margin="0,0,0,12" />
+
+        <TextBlock Text="Label" FontWeight="Bold" Margin="0,0,0,4" />
+        <TextBox x:Name="LabelTextBox" Margin="0,0,0,12" />
+
+        <TextBlock x:Name="ErrorTextBlock"
+                    Foreground="Red"
+                    TextWrapping="Wrap"
+                    Margin="0,0,0,8"
+                    Visibility="Collapsed" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Content="Remove Account"
+                    Padding="12,5"
+                    HorizontalAlignment="Left"
+                    Foreground="#B3261E"
+                    Click="Remove_Click" />
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Content="Cancel" Padding="12,5" Margin="0,0,8,0" Click="Cancel_Click" />
+                <Button Content="Save" Padding="12,5" Click="Save_Click" IsDefault="True" />
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</Window>

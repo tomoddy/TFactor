@@ -121,8 +121,6 @@ public partial class ImportWindow : Window
     /// <summary>
     /// Adds the checked accounts to ImportedAccounts and closes the dialog with a successful result.
     /// </summary>
-    /// <param name="sender">The sender of the event.</param>
-    /// <param name="e">The event arguments.</param>
     private void Import_Click(object sender, RoutedEventArgs e)
     {
         ImportedAccounts.AddRange(_candidates.Where(c => c.IsSelected).Select(c => c.Account));
@@ -132,8 +130,6 @@ public partial class ImportWindow : Window
     /// <summary>
     /// Closes the dialog without importing anything.
     /// </summary>
-    /// <param name="sender">The sender of the event.</param>
-    /// <param name="e">The event arguments.</param>
     private void Cancel_Click(object sender, RoutedEventArgs e)
     {
         DialogResult = false;

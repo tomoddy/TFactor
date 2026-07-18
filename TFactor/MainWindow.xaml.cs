@@ -58,8 +58,6 @@ public partial class MainWindow : Window
     /// <summary>
     /// Opens the manual "Add Account" dialog and adds the result to the list.
     /// </summary>
-    /// <param name="sender">The sender of the event.</param>
-    /// <param name="e">The event arguments.</param>
     private void AddAccount_Click(object sender, RoutedEventArgs e)
     {
         AddAccountWindow window = new() { Owner = this };
@@ -74,8 +72,6 @@ public partial class MainWindow : Window
     /// <summary>
     /// Opens the "Import from Screenshot" dialog and adds any accounts the user chose to import.
     /// </summary>
-    /// <param name="sender">The sender of the event.</param>
-    /// <param name="e">The event arguments.</param>
     private void ImportFromScreenshot_Click(object sender, RoutedEventArgs e)
     {
         ImportWindow window = new() { Owner = this };
@@ -91,16 +87,32 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Removes the account associated with the clicked "Remove" button.
+    /// Opens the edit dialog for the account associated with the clicked "Edit" button, then applies whatever the dialog reports - either updated details or removal.
     /// </summary>
-    private void DeleteAccount_Click(object sender, RoutedEventArgs e)
+    private void EditAccount_Click(object sender, RoutedEventArgs e)
     {
-        if (sender is FrameworkElement { Tag: AccountRowViewModel row })
+        if (sender is not FrameworkElement { Tag: AccountRowViewModel row })
+        {
+            return;
+        }
+
+        EditAccountWindow window = new(row.Account) { Owner = this };
+        if (window.ShowDialog() != true)
+        {
+            return;
+        }
+
+        if (window.WasRemoved)
         {
             _rows.Remove(row);
-            UpdateEmptyMessageVisibility();
-            SaveAccounts();
         }
+        else
+        {
+            row.NotifyDetailsChanged();
+        }
+
+        UpdateEmptyMessageVisibility();
+        SaveAccounts();
     }
 
     /// <summary>
