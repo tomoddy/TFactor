@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 using TFactor.Models;
 using TFactor.Services;
@@ -22,6 +24,11 @@ public partial class MainWindow : Window
     /// The timer that updates the TOTP codes every x seconds.
     /// </summary>
     private readonly DispatcherTimer _refreshTimer;
+
+    /// <summary>
+    /// The ScrollViewer inside AccountList's default template, lazily found the first time the user scrolls.
+    /// </summary>
+    private ScrollViewer? _accountListScrollViewer;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MainWindow"/> class.
@@ -132,6 +139,57 @@ public partial class MainWindow : Window
     private void UpdateEmptyMessageVisibility()
     {
         EmptyMessage.Visibility = _rows.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    /// <summary>
+    /// Scrolls the account list exactly one row per mouse wheel notch, instead of WPF's default of a few rows at a time.
+    /// </summary>
+    /// <param name="sender">The account list</param>
+    /// <param name="e">The mouse wheel event arguments</param>
+    private void AccountList_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+    {
+        _accountListScrollViewer ??= FindVisualChild<ScrollViewer>(AccountList);
+        if (_accountListScrollViewer is null)
+        {
+            return;
+        }
+
+        if (e.Delta > 0)
+        {
+            _accountListScrollViewer.LineUp();
+        }
+        else
+        {
+            _accountListScrollViewer.LineDown();
+        }
+
+        e.Handled = true;
+    }
+
+    /// <summary>
+    /// Searches the visual tree under the given element for the first descendant of type <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of descendant to find</typeparam>
+    /// <param name="parent">The element to search under</param>
+    /// <returns>The first matching descendant, or null if none was found</returns>
+    private static T? FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+    {
+        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+        {
+            DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+            if (child is T typedChild)
+            {
+                return typedChild;
+            }
+
+            T? descendant = FindVisualChild<T>(child);
+            if (descendant is not null)
+            {
+                return descendant;
+            }
+        }
+
+        return null;
     }
 
     /// <summary>

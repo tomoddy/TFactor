@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TFactor"
         mc:Ignorable="d"
-        Title="TFactor" Height="500" Width="380" MinWidth="320"
+        Title="TFactor" Height="720" Width="380" MinWidth="320"
+        ResizeMode="CanResize"
         Icon="Icons/icon.ico"
         Background="{StaticResource Brush.Background}">
     <DockPanel Margin="12">
@@ -32,7 +33,10 @@
                     Margin="0,20,0,0"
                     Visibility="Collapsed" />
 
-        <ListBox x:Name="AccountList" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox x:Name="AccountList"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                 PreviewMouseWheel="AccountList_PreviewMouseWheel">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="{StaticResource Brush.Border}" BorderThickness="0,0,0,1" Padding="0,10">
