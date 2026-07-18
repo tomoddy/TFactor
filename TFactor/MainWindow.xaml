@@ -49,13 +49,15 @@
                             <StackPanel Grid.Column="0">
                                 <TextBlock Text="{Binding Issuer}" FontWeight="Bold" FontSize="14" />
                                 <TextBlock Text="{Binding Label}" Foreground="{StaticResource Brush.TextTeal}" FontSize="12" />
-                                <TextBlock Text="{Binding Code}"
-                                           FontSize="26"
-                                           Foreground="{StaticResource Brush.AccentBlue}"
-                                           Margin="0,4,0,0"
-                                           Cursor="Hand"
-                                           ToolTip="Click to copy"
-                                           MouseLeftButtonUp="Code_Click" />
+                                <Button Margin="0,4,0,0"
+                                        Padding="6,2"
+                                        HorizontalAlignment="Left"
+                                        ToolTip="Click to copy"
+                                        Click="Code_Click">
+                                    <TextBlock Text="{Binding Code}"
+                                               FontSize="26"
+                                               Foreground="{StaticResource Brush.AccentBlue}" />
+                                </Button>
                             </StackPanel>
 
                             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">

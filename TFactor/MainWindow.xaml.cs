@@ -125,7 +125,7 @@ public partial class MainWindow : Window
     /// <summary>
     /// Copies the clicked account's current code to the clipboard.
     /// </summary>
-    private void Code_Click(object sender, MouseButtonEventArgs e)
+    private void Code_Click(object sender, RoutedEventArgs e)
     {
         if (sender is FrameworkElement { DataContext: AccountRowViewModel row })
         {
