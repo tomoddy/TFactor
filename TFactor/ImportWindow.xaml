@@ -61,7 +61,7 @@
                             <CheckBox IsChecked="{Binding IsSelected}" VerticalAlignment="Center" Margin="0,0,8,0" />
                             <StackPanel>
                                 <TextBlock Text="{Binding Issuer}" FontWeight="Bold" />
-                                <TextBlock Text="{Binding Label}" Foreground="{StaticResource Brush.TextSecondary}" FontSize="12" />
+                                <TextBlock Text="{Binding Label}" Foreground="{StaticResource Brush.TextTeal}" FontSize="12" />
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

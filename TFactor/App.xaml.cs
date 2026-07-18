@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Windows.Media;
 using TFactor.Services;
 
 namespace TFactor;
@@ -16,6 +17,10 @@ public partial class App : Application
     protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+
+        // Finds the embedded Roboto Mono font by asking WPF to enumerate what it can actually see under Fonts/, rather than hand-building a pack URI string and hoping it resolves - confirmed via a diagnostic that the font embeds fine and is the only family found there, so just take it directly instead of filtering by name. Published as a resource so DarkTheme.xaml's control styles can pick it up via DynamicResource - it has to be Dynamic, since this runs after that dictionary has already been parsed.
+        Uri fontsFolderUri = new("pack://application:,,,/TFactor;component/Fonts/");
+        Resources["AppFontFamily"] = Fonts.GetFontFamilies(fontsFolderUri).First();
 
         // Applies to every window the app creates (MainWindow and all dialogs), so none of them show up with a native white title bar. SourceInitialized isn't a routed event, so we hook Loaded instead - the window's native handle already exists by then.
         EventManager.RegisterClassHandler(typeof(Window), FrameworkElement.LoadedEvent, new RoutedEventHandler(OnWindowLoaded));

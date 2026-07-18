@@ -16,7 +16,7 @@
         <TextBox x:Name="LabelTextBox" Margin="0,0,0,12" />
 
         <TextBlock Text="Secret Key" FontWeight="Bold" Margin="0,0,0,4" />
-        <TextBox x:Name="SecretTextBox" Margin="0,0,0,12" FontFamily="Consolas" />
+        <TextBox x:Name="SecretTextBox" Margin="0,0,0,12" />
 
         <TextBlock Text="Algorithm" FontWeight="Bold" Margin="0,0,0,4" />
         <ComboBox x:Name="AlgorithmComboBox" Margin="0,0,0,12" SelectedIndex="0">

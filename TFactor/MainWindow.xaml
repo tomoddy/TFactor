@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TFactor"
         mc:Ignorable="d"
-        Title="TFactor" Height="720" Width="380" MinWidth="320"
+        Title="TFactor" Height="760" Width="280" MinWidth="280"
         ResizeMode="CanResize"
         Icon="Icons/icon.ico"
         Background="{StaticResource Brush.Background}">
@@ -48,10 +48,9 @@
 
                             <StackPanel Grid.Column="0">
                                 <TextBlock Text="{Binding Issuer}" FontWeight="Bold" FontSize="14" />
-                                <TextBlock Text="{Binding Label}" Foreground="{StaticResource Brush.TextSecondary}" FontSize="12" />
+                                <TextBlock Text="{Binding Label}" Foreground="{StaticResource Brush.TextTeal}" FontSize="12" />
                                 <TextBlock Text="{Binding Code}"
                                            FontSize="26"
-                                           FontFamily="Consolas"
                                            Foreground="{StaticResource Brush.AccentBlue}"
                                            Margin="0,4,0,0"
                                            Cursor="Hand"
@@ -63,9 +62,9 @@
                                 <TextBlock Text="{Binding SecondsRemaining, StringFormat={}{0}s}"
                                            HorizontalAlignment="Center"
                                            FontSize="12"
-                                           Foreground="{StaticResource Brush.TextSecondary}" />
-                                <Button Width="20"
-                                        Height="20"
+                                           Foreground="{StaticResource Brush.TextTeal}" />
+                                <Button Width="32"
+                                        Height="32"
                                         Tag="{Binding}"
                                         Click="EditAccount_Click"
                                         Margin="0,6,0,0"
