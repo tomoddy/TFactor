@@ -1,11 +1,10 @@
-﻿using System.Windows;
+using System.Windows;
 
-namespace TFactor
+namespace TFactor;
+
+/// <summary>
+/// The application entry point. Launches MainWindow via the StartupUri set in App.xaml.
+/// </summary>
+public partial class App : Application
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
-    {
-    }
 }
