@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TFactor"
         mc:Ignorable="d"
-        Title="TFactor" Height="500" Width="380" MinWidth="320">
+        Title="TFactor" Height="500" Width="380" MinWidth="320"
+        Icon="icon.ico">
     <DockPanel Margin="12">
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
             <Button x:Name="AddAccountButton" Content="Add Account" Padding="10,5" Margin="0,0,8,0" Click="AddAccount_Click" />
