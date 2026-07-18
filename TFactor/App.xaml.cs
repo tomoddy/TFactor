@@ -17,6 +17,9 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
+        // Applies to every window the app creates (MainWindow and all dialogs), so none of them show up with a native white title bar. SourceInitialized isn't a routed event, so we hook Loaded instead - the window's native handle already exists by then.
+        EventManager.RegisterClassHandler(typeof(Window), FrameworkElement.LoadedEvent, new RoutedEventHandler(OnWindowLoaded));
+
         // No window is open yet, so keep the app alive ourselves while we wait on the async Windows Hello prompt
         ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
@@ -36,5 +39,18 @@ public partial class App : Application
         MainWindow window = new();
         MainWindow = window;
         window.Show();
+    }
+
+    /// <summary>
+    /// Switches a window's title bar to dark mode once it's loaded, by which point it already has a native handle to apply that to.
+    /// </summary>
+    /// <param name="sender">The window that was just loaded</param>
+    /// <param name="e">Unused</param>
+    private static void OnWindowLoaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is Window window)
+        {
+            DarkTitleBar.Apply(window);
+        }
     }
 }

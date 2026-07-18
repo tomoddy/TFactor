@@ -6,10 +6,16 @@
         xmlns:local="clr-namespace:TFactor"
         mc:Ignorable="d"
         Title="TFactor" Height="500" Width="380" MinWidth="320"
-        Icon="icon.ico">
+        Icon="Icons/icon.ico"
+        Background="{StaticResource Brush.Background}">
     <DockPanel Margin="12">
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
-            <Button x:Name="AddAccountButton" Content="Add Account" Padding="10,5" Margin="0,0,8,0" Click="AddAccount_Click" />
+            <Button x:Name="AddAccountButton"
+                    Content="Add Account"
+                    Padding="10,5"
+                    Margin="0,0,8,0"
+                    Style="{StaticResource AccentButton}"
+                    Click="AddAccount_Click" />
             <Button x:Name="ImportButton" Content="Import from Screenshot" Padding="10,5" Click="ImportFromScreenshot_Click" />
         </StackPanel>
 
@@ -17,15 +23,15 @@
                     DockPanel.Dock="Bottom"
                     Text="No accounts yet. Add one, or import from a Google Authenticator screenshot."
                     TextWrapping="Wrap"
-                    Foreground="Gray"
+                    Foreground="{StaticResource Brush.TextSecondary}"
                     HorizontalAlignment="Center"
                     Margin="0,20,0,0"
                     Visibility="Collapsed" />
 
-        <ListBox x:Name="AccountList" BorderThickness="0" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox x:Name="AccountList" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="#DDDDDD" BorderThickness="0,0,0,1" Padding="0,10">
+                    <Border BorderBrush="{StaticResource Brush.Border}" BorderThickness="0,0,0,1" Padding="0,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -34,10 +40,11 @@
 
                             <StackPanel Grid.Column="0">
                                 <TextBlock Text="{Binding Issuer}" FontWeight="Bold" FontSize="14" />
-                                <TextBlock Text="{Binding Label}" Foreground="Gray" FontSize="12" />
+                                <TextBlock Text="{Binding Label}" Foreground="{StaticResource Brush.TextSecondary}" FontSize="12" />
                                 <TextBlock Text="{Binding Code}"
                                            FontSize="26"
                                            FontFamily="Consolas"
+                                           Foreground="{StaticResource Brush.AccentBlue}"
                                            Margin="0,4,0,0"
                                            Cursor="Hand"
                                            ToolTip="Click to copy"
@@ -48,13 +55,12 @@
                                 <TextBlock Text="{Binding SecondsRemaining, StringFormat={}{0}s}"
                                            HorizontalAlignment="Center"
                                            FontSize="12"
-                                           Foreground="Gray" />
+                                           Foreground="{StaticResource Brush.TextSecondary}" />
                                 <Button Content="Edit"
                                         Tag="{Binding}"
                                         Click="EditAccount_Click"
                                         Margin="0,6,0,0"
-                                        Padding="6,2"
-                                        FontSize="10" />
+                                        Style="{StaticResource RowButton}" />
                             </StackPanel>
                         </Grid>
                     </Border>

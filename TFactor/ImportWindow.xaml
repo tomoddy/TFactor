@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:TFactor"
         mc:Ignorable="d"
         Title="Import from Screenshot" Height="480" Width="380"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource Brush.Background}">
     <DockPanel Margin="16">
         <TextBlock DockPanel.Dock="Top"
                     TextWrapping="Wrap"
@@ -23,35 +24,42 @@
 
         <TextBlock x:Name="ErrorTextBlock"
                     DockPanel.Dock="Top"
-                    Foreground="Red"
+                    Foreground="{StaticResource Brush.AccentPink}"
                     TextWrapping="Wrap"
                     Margin="0,0,0,12"
                     Visibility="Collapsed" />
 
         <TextBlock x:Name="StatusTextBlock"
                     DockPanel.Dock="Top"
-                    Foreground="#1A5FB4"
+                    Foreground="{StaticResource Brush.AccentYellow}"
                     TextWrapping="Wrap"
                     Margin="0,0,0,12"
                     Visibility="Collapsed" />
 
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
             <Button Content="Cancel" Padding="12,5" Margin="0,0,8,0" Click="Cancel_Click" />
-            <Button x:Name="ImportButton" Content="Import Selected" Padding="12,5" IsEnabled="False" Click="Import_Click" />
+            <Button x:Name="ImportButton"
+                    Content="Import Selected"
+                    Padding="12,5"
+                    IsEnabled="False"
+                    Style="{StaticResource AccentButton}"
+                    Click="Import_Click" />
         </StackPanel>
 
-        <ListBox x:Name="CandidateList" BorderThickness="1" BorderBrush="#DDDDDD">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="4">
-                        <CheckBox IsChecked="{Binding IsSelected}" VerticalAlignment="Center" Margin="0,0,8,0" />
-                        <StackPanel>
-                            <TextBlock Text="{Binding Issuer}" FontWeight="Bold" />
-                            <TextBlock Text="{Binding Label}" Foreground="Gray" FontSize="12" />
+        <Border BorderBrush="{StaticResource Brush.Border}" BorderThickness="1" CornerRadius="6">
+            <ListBox x:Name="CandidateList">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="8,6">
+                            <CheckBox IsChecked="{Binding IsSelected}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                            <StackPanel>
+                                <TextBlock Text="{Binding Issuer}" FontWeight="Bold" />
+                                <TextBlock Text="{Binding Label}" Foreground="{StaticResource Brush.TextSecondary}" FontSize="12" />
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
     </DockPanel>
 </Window>

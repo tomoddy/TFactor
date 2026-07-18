@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:TFactor"
         mc:Ignorable="d"
         Title="Edit Account" Height="280" Width="340"
-        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="{StaticResource Brush.Background}">
     <StackPanel Margin="16">
         <TextBlock Text="Issuer" FontWeight="Bold" Margin="0,0,0,4" />
         <TextBox x:Name="IssuerTextBox" Margin="0,0,0,12" />
@@ -15,7 +16,7 @@
         <TextBox x:Name="LabelTextBox" Margin="0,0,0,12" />
 
         <TextBlock x:Name="ErrorTextBlock"
-                    Foreground="Red"
+                    Foreground="{StaticResource Brush.AccentPink}"
                     TextWrapping="Wrap"
                     Margin="0,0,0,8"
                     Visibility="Collapsed" />
@@ -30,12 +31,12 @@
                     Content="Remove Account"
                     Padding="12,5"
                     HorizontalAlignment="Left"
-                    Foreground="#B3261E"
+                    Style="{StaticResource DestructiveButton}"
                     Click="Remove_Click" />
 
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Button Content="Cancel" Padding="12,5" Margin="0,0,8,0" Click="Cancel_Click" />
-                <Button Content="Save" Padding="12,5" Click="Save_Click" IsDefault="True" />
+                <Button Content="Save" Padding="12,5" Style="{StaticResource AccentButton}" Click="Save_Click" IsDefault="True" />
             </StackPanel>
         </Grid>
     </StackPanel>
