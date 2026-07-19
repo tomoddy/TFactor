@@ -30,14 +30,13 @@ Or open `TFactor.slnx` in Visual Studio and run from there.
 
 ## Building the installer
 
-Requires the [Inno Setup](https://jrsoftware.org/isinfo.php) compiler (`iscc`) on your PATH.
+Requires [Inno Setup](https://jrsoftware.org/isinfo.php) to be installed.
 
 ```
-dotnet publish TFactor\TFactor.csproj -c Release -p:PublishProfile=SelfContained
-iscc Installer\TFactor.iss
+.\Installer\build.ps1
 ```
 
-Output: `Installer\Output\TFactorSetup.exe`.
+Publishes a self-contained `TFactor.exe` and compiles it into `Installer\Output\TFactorSetup.exe`. Pass `-Version 1.1.0` to bump the installer's version number as part of the same run.
 
 ## Tech
 
