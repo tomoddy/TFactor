@@ -25,10 +25,13 @@
             <Button x:Name="ImportButton" DockPanel.Dock="Left" Width="32" Height="32" Margin="0,0,8,0" ToolTip="{x:Static properties:Strings.MainWindow_ImportTooltip}" Click="ImportFromScreenshot_Click">
                 <Image Source="Icons/import.png" Stretch="Uniform" />
             </Button>
+            <Button x:Name="ManageTagsButton" DockPanel.Dock="Left" Width="32" Height="32" Margin="0,0,8,0" ToolTip="{x:Static properties:Strings.MainWindow_ManageTagsTooltip}" Click="ManageTags_Click">
+                <Image Source="Icons/tag.png" Stretch="Uniform" />
+            </Button>
 
             <Grid VerticalAlignment="Center">
                 <TextBox x:Name="SearchBox"
-                         Width="150"
+                         Width="110"
                          Height="26"
                          Padding="3,0"
                          VerticalContentAlignment="Center"
@@ -48,7 +51,22 @@
         <ListBox x:Name="AccountList"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                 VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                 VirtualizingPanel.ScrollUnit="Item"
                  PreviewMouseWheel="AccountList_PreviewMouseWheel">
+            <ListBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"
+                                       FontWeight="Bold"
+                                       FontSize="18"
+                                       Foreground="{StaticResource Brush.AccentPink}"
+                                       Margin="0,10,0,4" />
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListBox.GroupStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="{StaticResource Brush.Border}" BorderThickness="0,0,0,1" Padding="0,10">

@@ -21,6 +21,11 @@ public class Account
     public string Label { get; set; } = string.Empty;
 
     /// <summary>
+    /// Optional free-text tag used to group accounts in the main list. Empty means untagged.
+    /// </summary>
+    public string Tag { get; set; } = string.Empty;
+
+    /// <summary>
     /// Base32-encoded shared secret (as given by the service / QR code).
     /// </summary>
     public string Secret { get; set; } = string.Empty;

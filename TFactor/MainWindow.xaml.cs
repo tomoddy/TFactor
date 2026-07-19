@@ -38,6 +38,11 @@ public partial class MainWindow : Window
     private readonly ICollectionView _accountsView;
 
     /// <summary>
+    /// The current tag display order (Untagged is implicit and always first, so it's not included here). Recomputed via RefreshTagOrder() whenever the set of in-use tags might have changed.
+    /// </summary>
+    private List<string> _tagOrder = [];
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="MainWindow"/> class.
     /// </summary>
     public MainWindow()
@@ -51,6 +56,8 @@ public partial class MainWindow : Window
         }
         AccountList.ItemsSource = _rows;
         _accountsView = CollectionViewSource.GetDefaultView(_rows);
+        _accountsView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(AccountRowViewModel.TagGroupHeader)));
+        RefreshTagOrder();
         SortRows();
         UpdateEmptyMessageVisibility();
 
@@ -80,6 +87,7 @@ public partial class MainWindow : Window
         if (window.ShowDialog() == true && window.CreatedAccount is { } account)
         {
             _rows.Add(new AccountRowViewModel(account));
+            RefreshTagOrder();
             SortRows();
             UpdateEmptyMessageVisibility();
             SaveAccounts();
@@ -98,6 +106,7 @@ public partial class MainWindow : Window
             {
                 _rows.Add(new AccountRowViewModel(account));
             }
+            RefreshTagOrder();
             SortRows();
             UpdateEmptyMessageVisibility();
             SaveAccounts();
@@ -127,11 +136,26 @@ public partial class MainWindow : Window
         else
         {
             row.NotifyDetailsChanged();
-            SortRows();
         }
 
+        RefreshTagOrder();
+        SortRows();
         UpdateEmptyMessageVisibility();
         SaveAccounts();
+    }
+
+    /// <summary>
+    /// Opens the "Manage Tags" dialog and, if the user saves changes, persists the new tag order and re-sorts the list.
+    /// </summary>
+    private void ManageTags_Click(object sender, RoutedEventArgs e)
+    {
+        ManageTagsWindow window = new(_tagOrder) { Owner = this };
+        if (window.ShowDialog() == true)
+        {
+            TagOrderStorage.Save(window.SavedOrder);
+            RefreshTagOrder();
+            SortRows();
+        }
     }
 
     /// <summary>
@@ -158,11 +182,14 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Re-sorts the account list by issuer, then by label, moving rows into place in the existing ObservableCollection rather than rebuilding it - so the UI just animates rows into their new positions instead of flickering. Call this whenever an account is added, imported, or edited.
+    /// Re-sorts the account list by tag order (Untagged always first), then by issuer, then by label, moving rows into place in the existing ObservableCollection rather than rebuilding it - so the UI just animates rows into their new positions instead of flickering. Call this whenever an account is added, imported, edited, or removed, or after the tag order changes - after calling RefreshTagOrder() if the set of in-use tags might have changed.
     /// </summary>
     private void SortRows()
     {
-        List<AccountRowViewModel> sorted = [.. _rows.OrderBy(r => r.Issuer, StringComparer.CurrentCultureIgnoreCase).ThenBy(r => r.Label, StringComparer.CurrentCultureIgnoreCase)];
+        List<AccountRowViewModel> sorted = [.. _rows
+            .OrderBy(r => GetTagRank(r.Account.Tag))
+            .ThenBy(r => r.Issuer, StringComparer.CurrentCultureIgnoreCase)
+            .ThenBy(r => r.Label, StringComparer.CurrentCultureIgnoreCase)];
         for (int i = 0; i < sorted.Count; i++)
         {
             int currentIndex = _rows.IndexOf(sorted[i]);
@@ -171,6 +198,33 @@ public partial class MainWindow : Window
                 _rows.Move(currentIndex, i);
             }
         }
+
+        // The grouped CollectionView only assigns each group's display order once, the first time it encounters that group - it doesn't re-derive group order just because the underlying items got reordered via Move above. Refresh() forces it to recompute groups (and their order) from the collection's current, now-correctly-sorted order.
+        _accountsView.Refresh();
+    }
+
+    /// <summary>
+    /// Recomputes _tagOrder from the saved tag order reconciled against the tags actually in use right now. Call this whenever the set of in-use tags might have changed (accounts added, imported, edited, or removed), before SortRows().
+    /// </summary>
+    private void RefreshTagOrder()
+    {
+        List<string> tagsInUse = [.. _rows.Select(r => r.Account.Tag).Where(t => !string.IsNullOrWhiteSpace(t)).Distinct()];
+        _tagOrder = TagOrderStorage.Reconcile(TagOrderStorage.Load(), tagsInUse);
+    }
+
+    /// <summary>
+    /// The sort rank for a tag - Untagged (empty) always sorts first, then real tags in _tagOrder's order, then any not-yet-reconciled tag last.
+    /// </summary>
+    /// <param name="tag">The account's tag</param>
+    private int GetTagRank(string tag)
+    {
+        if (string.IsNullOrWhiteSpace(tag))
+        {
+            return -1;
+        }
+
+        int index = _tagOrder.IndexOf(tag);
+        return index >= 0 ? index : _tagOrder.Count;
     }
 
     /// <summary>

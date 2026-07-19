@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TFactor"
         xmlns:properties="clr-namespace:TFactor.Properties"
         mc:Ignorable="d"
-        Title="{x:Static properties:Strings.AddAccountWindow_Title}" Height="440" Width="340"
+        Title="{x:Static properties:Strings.AddAccountWindow_Title}" Height="510" Width="340"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         Background="{StaticResource Brush.Background}">
     <StackPanel Margin="16">
@@ -15,6 +15,9 @@
 
         <TextBlock Text="{x:Static properties:Strings.Common_LabelLabel}" FontWeight="Bold" Margin="0,0,0,4" />
         <TextBox x:Name="LabelTextBox" Margin="0,0,0,12" />
+
+        <TextBlock Text="{x:Static properties:Strings.Common_TagLabel}" FontWeight="Bold" Margin="0,0,0,4" />
+        <TextBox x:Name="TagTextBox" Margin="0,0,0,12" />
 
         <TextBlock Text="{x:Static properties:Strings.AddAccountWindow_SecretKeyLabel}" FontWeight="Bold" Margin="0,0,0,4" />
         <TextBox x:Name="SecretTextBox" Margin="0,0,0,12" />

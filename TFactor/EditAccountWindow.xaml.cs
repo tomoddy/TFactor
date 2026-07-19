@@ -29,6 +29,7 @@ public partial class EditAccountWindow : Window
         _account = account;
         IssuerTextBox.Text = account.Issuer;
         LabelTextBox.Text = account.Label;
+        TagTextBox.Text = account.Tag;
     }
 
     /// <summary>
@@ -45,6 +46,7 @@ public partial class EditAccountWindow : Window
         }
         _account.Issuer = issuer;
         _account.Label = label;
+        _account.Tag = TagTextBox.Text.Trim();
         DialogResult = true;
     }
 

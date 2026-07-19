@@ -33,6 +33,8 @@ public static class Strings
     public static string Common_LabelLabel => Get(nameof(Common_LabelLabel));
     public static string Common_CancelTooltip => Get(nameof(Common_CancelTooltip));
     public static string Common_SaveTooltip => Get(nameof(Common_SaveTooltip));
+    public static string Common_TagLabel => Get(nameof(Common_TagLabel));
+    public static string Common_UntaggedLabel => Get(nameof(Common_UntaggedLabel));
 
     #endregion
 
@@ -43,6 +45,7 @@ public static class Strings
     public static string MainWindow_EmptyMessage => Get(nameof(MainWindow_EmptyMessage));
     public static string MainWindow_CodeTooltip => Get(nameof(MainWindow_CodeTooltip));
     public static string MainWindow_EditTooltip => Get(nameof(MainWindow_EditTooltip));
+    public static string MainWindow_ManageTagsTooltip => Get(nameof(MainWindow_ManageTagsTooltip));
 
     #endregion
 
@@ -81,6 +84,14 @@ public static class Strings
     public static string ImportWindow_NoAccountsFoundError => Get(nameof(ImportWindow_NoAccountsFoundError));
     public static string ImportWindow_DuplicateSkippedStatus => Get(nameof(ImportWindow_DuplicateSkippedStatus));
     public static string ImportWindow_UnknownIssuerPlaceholder => Get(nameof(ImportWindow_UnknownIssuerPlaceholder));
+
+    #endregion
+
+    #region ManageTagsWindow
+
+    public static string ManageTagsWindow_Title => Get(nameof(ManageTagsWindow_Title));
+    public static string ManageTagsWindow_MoveUpTooltip => Get(nameof(ManageTagsWindow_MoveUpTooltip));
+    public static string ManageTagsWindow_MoveDownTooltip => Get(nameof(ManageTagsWindow_MoveDownTooltip));
 
     #endregion
 

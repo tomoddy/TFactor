@@ -132,6 +132,12 @@
   <data name="Common_SaveTooltip" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="Common_TagLabel" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="Common_UntaggedLabel" xml:space="preserve">
+    <value>Untagged</value>
+  </data>
   <data name="MainWindow_AddAccountTooltip" xml:space="preserve">
     <value>Add Account</value>
   </data>
@@ -146,6 +152,9 @@
   </data>
   <data name="MainWindow_EditTooltip" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="MainWindow_ManageTagsTooltip" xml:space="preserve">
+    <value>Manage Tags</value>
   </data>
   <data name="AddAccountWindow_Title" xml:space="preserve">
     <value>Add Account</value>
@@ -218,6 +227,15 @@
   </data>
   <data name="ImportWindow_UnknownIssuerPlaceholder" xml:space="preserve">
     <value>(Unknown)</value>
+  </data>
+  <data name="ManageTagsWindow_Title" xml:space="preserve">
+    <value>Manage Tags</value>
+  </data>
+  <data name="ManageTagsWindow_MoveUpTooltip" xml:space="preserve">
+    <value>Move Up</value>
+  </data>
+  <data name="ManageTagsWindow_MoveDownTooltip" xml:space="preserve">
+    <value>Move Down</value>
   </data>
   <data name="App_WindowsHelloPrompt" xml:space="preserve">
     <value>Unlock TFactor to view your authentication codes.</value>

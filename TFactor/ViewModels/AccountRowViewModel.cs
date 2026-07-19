@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using TFactor.Models;
+using TFactor.Properties;
 using TFactor.Services;
 
 namespace TFactor.ViewModels;
@@ -45,6 +46,11 @@ public class AccountRowViewModel : INotifyPropertyChanged
     public string Label => Account.Label;
 
     /// <summary>
+    /// The tag this account is grouped under in the main list, or the localized "Untagged" placeholder if it has none.
+    /// </summary>
+    public string TagGroupHeader => string.IsNullOrWhiteSpace(Account.Tag) ? Strings.Common_UntaggedLabel : Account.Tag;
+
+    /// <summary>
     /// The current TOTP code for this account.
     /// </summary>
     public string Code
@@ -86,6 +92,7 @@ public class AccountRowViewModel : INotifyPropertyChanged
     {
         OnPropertyChanged(nameof(Issuer));
         OnPropertyChanged(nameof(Label));
+        OnPropertyChanged(nameof(TagGroupHeader));
     }
 
     /// <summary>

@@ -57,6 +57,7 @@ public partial class AddAccountWindow : Window
         {
             Issuer = IssuerTextBox.Text.Trim(),
             Label = LabelTextBox.Text.Trim(),
+            Tag = TagTextBox.Text.Trim(),
             Secret = secret,
             Algorithm = Enum.Parse<TotpAlgorithm>(algorithmText),
             Digits = int.Parse(digitsText)
