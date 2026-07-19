@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -117,8 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-
-  <!-- Shared across multiple windows -->
   <data name="Common_AppTitle" xml:space="preserve">
     <value>TFactor</value>
   </data>
@@ -134,8 +132,6 @@
   <data name="Common_SaveTooltip" xml:space="preserve">
     <value>Save</value>
   </data>
-
-  <!-- MainWindow -->
   <data name="MainWindow_AddAccountTooltip" xml:space="preserve">
     <value>Add Account</value>
   </data>
@@ -151,8 +147,6 @@
   <data name="MainWindow_EditTooltip" xml:space="preserve">
     <value>Edit</value>
   </data>
-
-  <!-- AddAccountWindow -->
   <data name="AddAccountWindow_Title" xml:space="preserve">
     <value>Add Account</value>
   </data>
@@ -169,10 +163,8 @@
     <value>Enter the secret key given by the service.</value>
   </data>
   <data name="AddAccountWindow_InvalidSecretError" xml:space="preserve">
-    <value>That doesn't look like a valid secret key.</value>
+    <value>Invalid secret key.</value>
   </data>
-
-  <!-- EditAccountWindow -->
   <data name="EditAccountWindow_Title" xml:space="preserve">
     <value>Edit Account</value>
   </data>
@@ -180,21 +172,19 @@
     <value>Remove Account</value>
   </data>
   <data name="EditAccountWindow_MissingIssuerOrLabelError" xml:space="preserve">
-    <value>Enter an issuer or a label so you can tell this account apart from others.</value>
+    <value>Enter an issuer or a label.</value>
   </data>
   <data name="EditAccountWindow_RemoveConfirmMessage" xml:space="preserve">
-    <value>Remove "{0}"? You'll need to set it up again from the service if you change your mind.</value>
+    <value>Remove "{0}"?</value>
   </data>
   <data name="EditAccountWindow_RemoveConfirmTitle" xml:space="preserve">
     <value>Remove Account</value>
   </data>
-
-  <!-- ImportWindow -->
   <data name="ImportWindow_Title" xml:space="preserve">
     <value>Import from Screenshot</value>
   </data>
   <data name="ImportWindow_Instructions" xml:space="preserve">
-    <value>Choose either a single account's QR code or Google Authenticator's 'Transfer accounts' export QR code. If your export used more than one QR code, choose each screenshot in turn - they'll all be added below.</value>
+    <value>Choose either a single account's QR code or Google Authenticator's 'Transfer accounts' export QR code.</value>
   </data>
   <data name="ImportWindow_ChooseScreenshotTooltip" xml:space="preserve">
     <value>Choose Screenshot...</value>
@@ -218,13 +208,11 @@
     <value>That QR code isn't a recognized authenticator export or account code.</value>
   </data>
   <data name="ImportWindow_MultiPartStatus" xml:space="preserve">
-    <value>This export is split across {0} QR codes (this is part {1}). Choose the next screenshot to add the rest, or click Import to finish with what you have so far.</value>
+    <value>This export is split across {0} QR codes (this is part {1}). Choose the next screenshot to add more, or click Import to finish.</value>
   </data>
   <data name="ImportWindow_NoAccountsFoundError" xml:space="preserve">
     <value>No accounts were found in that QR code.</value>
   </data>
-
-  <!-- App -->
   <data name="App_WindowsHelloPrompt" xml:space="preserve">
     <value>Unlock TFactor to view your authentication codes.</value>
   </data>
