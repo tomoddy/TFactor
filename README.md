@@ -14,15 +14,30 @@ A local two-factor authentication (TOTP) app for Windows, built with WPF/.NET. Y
 ## Requirements
 
 - Windows 10 (1809/build 17763) or later
-- .NET 10 SDK, to build and run
+- .NET 10 SDK - only needed if building from source; the installer bundles its own runtime
 
-## Usage
+## Installing
+
+Download `TFactorSetup.exe` from the latest release and run it. It installs for your Windows user only - no admin rights needed - and adds a Start Menu shortcut and uninstaller.
+
+## Running from source
 
 ```
 dotnet run --project TFactor
 ```
 
 Or open `TFactor.slnx` in Visual Studio and run from there.
+
+## Building the installer
+
+Requires the [Inno Setup](https://jrsoftware.org/isinfo.php) compiler (`iscc`) on your PATH.
+
+```
+dotnet publish TFactor\TFactor.csproj -c Release -p:PublishProfile=SelfContained
+iscc Installer\TFactor.iss
+```
+
+Output: `Installer\Output\TFactorSetup.exe`.
 
 ## Tech
 
