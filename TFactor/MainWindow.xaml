@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="{x:Static properties:Strings.Common_AppTitle}" Height="760" Width="280" MinWidth="280" MaxWidth="280"
         ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen"
         Icon="Icons/icon.ico"
         Background="{StaticResource Brush.Background}">
     <DockPanel Margin="12">

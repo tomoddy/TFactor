@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media;
 using TFactor.Properties;
 using TFactor.Services;
@@ -29,8 +30,13 @@ public partial class App : Application
         // No window is open yet, so keep the app alive ourselves while we wait on the async Windows Hello prompt
         ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
+        // Create the real MainWindow up front, rather than a separate throwaway window, and give the Windows Hello prompt its handle to center on - reusing the same window (instead of showing a brand new one afterwards) is what keeps Windows treating the app as still having the foreground once the prompt closes. EnsureHandle() forces WPF to create the native window (applying WindowStartupLocation="CenterScreen" from MainWindow.xaml) without ever making it visible.
+        MainWindow window = new();
+        MainWindow = window;
+        IntPtr windowHandle = new WindowInteropHelper(window).EnsureHandle();
+
         // Keep prompting the user until they either verify successfully or decline to retry
-        while (!await WindowsHelloAuth.VerifyAsync(Strings.App_WindowsHelloPrompt))
+        while (!await WindowsHelloAuth.VerifyAsync(Strings.App_WindowsHelloPrompt, windowHandle))
         {
             MessageBoxResult retry = MessageBox.Show(Strings.App_VerificationFailedMessage, Strings.Common_AppTitle, MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (retry != MessageBoxResult.Yes)
@@ -42,9 +48,12 @@ public partial class App : Application
 
         // Verified - hand control back to the normal window-driven shutdown behavior and show the app
         ShutdownMode = ShutdownMode.OnMainWindowClose;
-        MainWindow window = new();
-        MainWindow = window;
         window.Show();
+
+        // Force the window to the foreground - after the Windows Hello prompt (a separate secure-desktop surface) closes, Windows' focus-stealing prevention can otherwise leave the app open but behind whatever the user was looking at
+        window.Activate();
+        window.Topmost = true;
+        window.Topmost = false;
     }
 
     /// <summary>
