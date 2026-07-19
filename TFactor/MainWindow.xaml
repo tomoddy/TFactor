@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TFactor"
         mc:Ignorable="d"
-        Title="TFactor" Height="760" Width="280" MinWidth="280"
+        Title="TFactor" Height="760" Width="280" MinWidth="280" MaxWidth="280"
         ResizeMode="CanResize"
         Icon="Icons/icon.ico"
         Background="{StaticResource Brush.Background}">
     <DockPanel Margin="12">
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
+        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,12">
             <Button x:Name="AddAccountButton"
+                    DockPanel.Dock="Left"
                     Width="32"
                     Height="32"
                     Margin="0,0,8,0"
@@ -19,10 +20,19 @@
                     Click="AddAccount_Click">
                 <Image Source="Icons/add.png" Stretch="Uniform" />
             </Button>
-            <Button x:Name="ImportButton" Width="32" Height="32" ToolTip="Import from Screenshot" Click="ImportFromScreenshot_Click">
+            <Button x:Name="ImportButton" DockPanel.Dock="Left" Width="32" Height="32" Margin="0,0,8,0" ToolTip="Import from Screenshot" Click="ImportFromScreenshot_Click">
                 <Image Source="Icons/import.png" Stretch="Uniform" />
             </Button>
-        </StackPanel>
+
+            <Grid VerticalAlignment="Center">
+                <TextBox x:Name="SearchBox"
+                         Width="150"
+                         Height="26"
+                         Padding="3,0"
+                         VerticalContentAlignment="Center"
+                         TextChanged="SearchBox_TextChanged" />
+            </Grid>
+        </DockPanel>
 
         <TextBlock x:Name="EmptyMessage"
                     DockPanel.Dock="Bottom"

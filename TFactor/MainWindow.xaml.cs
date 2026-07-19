@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -31,6 +33,11 @@ public partial class MainWindow : Window
     private ScrollViewer? _accountListScrollViewer;
 
     /// <summary>
+    /// The live view over the account list that SearchBox filters, layered on top of _rows without touching its actual order.
+    /// </summary>
+    private readonly ICollectionView _accountsView;
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="MainWindow"/> class.
     /// </summary>
     public MainWindow()
@@ -43,6 +50,7 @@ public partial class MainWindow : Window
             _rows.Add(new AccountRowViewModel(account));
         }
         AccountList.ItemsSource = _rows;
+        _accountsView = CollectionViewSource.GetDefaultView(_rows);
         SortRows();
         UpdateEmptyMessageVisibility();
 
@@ -124,6 +132,18 @@ public partial class MainWindow : Window
 
         UpdateEmptyMessageVisibility();
         SaveAccounts();
+    }
+
+    /// <summary>
+    /// Filters the account list down to rows whose issuer or label contains the search text, live as the user types.
+    /// </summary>
+    private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        string query = SearchBox.Text.Trim();
+        _accountsView.Filter = string.IsNullOrEmpty(query) ? null
+            : candidate => candidate is AccountRowViewModel row
+                && (row.Issuer.Contains(query, StringComparison.CurrentCultureIgnoreCase)
+                    || row.Label.Contains(query, StringComparison.CurrentCultureIgnoreCase));
     }
 
     /// <summary>
