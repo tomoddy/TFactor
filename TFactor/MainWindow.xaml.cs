@@ -43,6 +43,7 @@ public partial class MainWindow : Window
             _rows.Add(new AccountRowViewModel(account));
         }
         AccountList.ItemsSource = _rows;
+        SortRows();
         UpdateEmptyMessageVisibility();
 
         // Refresh every account's code once a second so they rotate live in the UI
@@ -71,6 +72,7 @@ public partial class MainWindow : Window
         if (window.ShowDialog() == true && window.CreatedAccount is { } account)
         {
             _rows.Add(new AccountRowViewModel(account));
+            SortRows();
             UpdateEmptyMessageVisibility();
             SaveAccounts();
         }
@@ -88,6 +90,7 @@ public partial class MainWindow : Window
             {
                 _rows.Add(new AccountRowViewModel(account));
             }
+            SortRows();
             UpdateEmptyMessageVisibility();
             SaveAccounts();
         }
@@ -116,6 +119,7 @@ public partial class MainWindow : Window
         else
         {
             row.NotifyDetailsChanged();
+            SortRows();
         }
 
         UpdateEmptyMessageVisibility();
@@ -130,6 +134,22 @@ public partial class MainWindow : Window
         if (sender is FrameworkElement { DataContext: AccountRowViewModel row })
         {
             Clipboard.SetText(row.Code);
+        }
+    }
+
+    /// <summary>
+    /// Re-sorts the account list by issuer, then by label, moving rows into place in the existing ObservableCollection rather than rebuilding it - so the UI just animates rows into their new positions instead of flickering. Call this whenever an account is added, imported, or edited.
+    /// </summary>
+    private void SortRows()
+    {
+        List<AccountRowViewModel> sorted = [.. _rows.OrderBy(r => r.Issuer, StringComparer.CurrentCultureIgnoreCase).ThenBy(r => r.Label, StringComparer.CurrentCultureIgnoreCase)];
+        for (int i = 0; i < sorted.Count; i++)
+        {
+            int currentIndex = _rows.IndexOf(sorted[i]);
+            if (currentIndex != i)
+            {
+                _rows.Move(currentIndex, i);
+            }
         }
     }
 
