@@ -79,6 +79,8 @@ public static class Strings
     public static string ImportWindow_UnrecognizedQrCodeError => Get(nameof(ImportWindow_UnrecognizedQrCodeError));
     public static string ImportWindow_MultiPartStatus => Get(nameof(ImportWindow_MultiPartStatus));
     public static string ImportWindow_NoAccountsFoundError => Get(nameof(ImportWindow_NoAccountsFoundError));
+    public static string ImportWindow_DuplicateSkippedStatus => Get(nameof(ImportWindow_DuplicateSkippedStatus));
+    public static string ImportWindow_UnknownIssuerPlaceholder => Get(nameof(ImportWindow_UnknownIssuerPlaceholder));
 
     #endregion
 

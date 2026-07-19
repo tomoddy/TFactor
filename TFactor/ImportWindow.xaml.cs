@@ -19,6 +19,11 @@ public partial class ImportWindow : Window
     private readonly ObservableCollection<ImportRowViewModel> _candidates = [];
 
     /// <summary>
+    /// Secrets of accounts already saved in the app, so accounts the user has already added can be skipped rather than imported as duplicates.
+    /// </summary>
+    private readonly HashSet<string> _existingSecrets;
+
+    /// <summary>
     /// The accounts the user selected to import, populated once the dialog closes successfully.
     /// </summary>
     public List<Account> ImportedAccounts { get; } = [];
@@ -26,10 +31,12 @@ public partial class ImportWindow : Window
     /// <summary>
     /// Initializes a new instance of the <see cref="ImportWindow"/> class.
     /// </summary>
-    public ImportWindow()
+    /// <param name="existingSecrets">Secrets of accounts already saved in the app, used to skip accounts that have already been added.</param>
+    public ImportWindow(IEnumerable<string> existingSecrets)
     {
         InitializeComponent();
         CandidateList.ItemsSource = _candidates;
+        _existingSecrets = [.. existingSecrets];
     }
 
     /// <summary>
@@ -68,7 +75,7 @@ public partial class ImportWindow : Window
     }
 
     /// <summary>
-    /// Parses the QR code's decoded text and merges any newly found accounts into the candidate list, skipping ones already present (matched by secret). Also surfaces a status message when a Google Authenticator export spans multiple QR codes.
+    /// Parses the QR code's decoded text and merges any newly found accounts into the candidate list, skipping ones already queued in this dialog (matched by secret) and ones already saved in the app. Also surfaces a status message when a Google Authenticator export spans multiple QR codes and/or when accounts were skipped as already-saved duplicates.
     /// </summary>
     /// <param name="decodedText">The raw text decoded from the QR code</param>
     /// <exception cref="FormatException">Thrown when the text is neither a recognized migration URI nor an otpauth URI.</exception>
@@ -81,6 +88,7 @@ public partial class ImportWindow : Window
         }
 
         List<Account> accounts;
+        string? multiPartStatus = null;
 
         if (uri.Scheme == "otpauth-migration")
         {
@@ -90,7 +98,7 @@ public partial class ImportWindow : Window
 
             if (batch.IsMultiPart)
             {
-                ShowStatus(string.Format(Strings.ImportWindow_MultiPartStatus, batch.BatchSize, batch.BatchIndex + 1));
+                multiPartStatus = string.Format(Strings.ImportWindow_MultiPartStatus, batch.BatchSize, batch.BatchIndex + 1);
             }
         }
         else if (uri.Scheme == "otpauth")
@@ -108,15 +116,41 @@ public partial class ImportWindow : Window
             return;
         }
 
-        // Skip any accounts already in the candidate list (e.g. if the same screenshot is chosen twice)
-        HashSet<string> existingSecrets = [.. _candidates.Select(c => c.Account.Secret)];
-        foreach (Account account in accounts.Where(a => !existingSecrets.Contains(a.Secret)))
+        // Skip accounts already queued in this dialog (e.g. the same screenshot chosen twice, or overlapping QR parts), and separately count ones already saved in the app so we can tell the user why they weren't added
+        HashSet<string> candidateSecrets = [.. _candidates.Select(c => c.Account.Secret)];
+        int alreadySavedCount = 0;
+        foreach (Account account in accounts)
         {
+            if (!candidateSecrets.Add(account.Secret))
+            {
+                continue;
+            }
+
+            if (_existingSecrets.Contains(account.Secret))
+            {
+                alreadySavedCount++;
+                continue;
+            }
+
             _candidates.Add(new ImportRowViewModel(account));
         }
 
         ImportButton.IsEnabled = _candidates.Count > 0;
         ChooseFileButton.ToolTip = Strings.ImportWindow_ChooseAnotherScreenshotTooltip;
+
+        // Show whichever status message(s) apply - both can happen at once (a multi-part export that also contains an already-saved account)
+        string? duplicateStatus = alreadySavedCount > 0 ? string.Format(Strings.ImportWindow_DuplicateSkippedStatus, alreadySavedCount) : null;
+        string? combinedStatus = (multiPartStatus, duplicateStatus) switch
+        {
+            (not null, not null) => $"{multiPartStatus} {duplicateStatus}",
+            (not null, null) => multiPartStatus,
+            (null, not null) => duplicateStatus,
+            _ => null
+        };
+        if (combinedStatus is not null)
+        {
+            ShowStatus(combinedStatus);
+        }
     }
 
     /// <summary>

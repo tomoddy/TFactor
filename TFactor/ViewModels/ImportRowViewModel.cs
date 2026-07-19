@@ -1,4 +1,5 @@
 using TFactor.Models;
+using TFactor.Properties;
 
 namespace TFactor.ViewModels;
 
@@ -21,7 +22,7 @@ public class ImportRowViewModel(Account account)
     /// <summary>
     /// The service/site name, e.g. "Google".
     /// </summary>
-    public string Issuer => string.IsNullOrWhiteSpace(Account.Issuer) ? "(Unknown)" : Account.Issuer;
+    public string Issuer => string.IsNullOrWhiteSpace(Account.Issuer) ? Strings.ImportWindow_UnknownIssuerPlaceholder : Account.Issuer;
 
     /// <summary>
     /// The account label, e.g. an email address.

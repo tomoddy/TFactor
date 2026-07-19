@@ -213,6 +213,12 @@
   <data name="ImportWindow_NoAccountsFoundError" xml:space="preserve">
     <value>No accounts were found in that QR code.</value>
   </data>
+  <data name="ImportWindow_DuplicateSkippedStatus" xml:space="preserve">
+    <value>{0} account(s) from that QR code are already in your list and were skipped.</value>
+  </data>
+  <data name="ImportWindow_UnknownIssuerPlaceholder" xml:space="preserve">
+    <value>(Unknown)</value>
+  </data>
   <data name="App_WindowsHelloPrompt" xml:space="preserve">
     <value>Unlock TFactor to view your authentication codes.</value>
   </data>

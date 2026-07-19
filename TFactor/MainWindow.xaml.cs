@@ -91,7 +91,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void ImportFromScreenshot_Click(object sender, RoutedEventArgs e)
     {
-        ImportWindow window = new() { Owner = this };
+        ImportWindow window = new(_rows.Select(r => r.Account.Secret)) { Owner = this };
         if (window.ShowDialog() == true)
         {
             foreach (Account account in window.ImportedAccounts)
