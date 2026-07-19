@@ -4,15 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TFactor"
+        xmlns:properties="clr-namespace:TFactor.Properties"
         mc:Ignorable="d"
-        Title="Import from Screenshot" Height="480" Width="380"
+        Title="{x:Static properties:Strings.ImportWindow_Title}" Height="480" Width="380"
         WindowStartupLocation="CenterOwner"
         Background="{StaticResource Brush.Background}">
     <DockPanel Margin="16">
         <TextBlock DockPanel.Dock="Top"
                     TextWrapping="Wrap"
                     Margin="0,0,0,12"
-                    Text="Choose either a single account's QR code or Google Authenticator's 'Transfer accounts' export QR code. If your export used more than one QR code, choose each screenshot in turn - they'll all be added below." />
+                    Text="{x:Static properties:Strings.ImportWindow_Instructions}" />
 
         <Button x:Name="ChooseFileButton"
                 DockPanel.Dock="Top"
@@ -20,7 +21,7 @@
                 Height="32"
                 HorizontalAlignment="Left"
                 Margin="0,0,0,12"
-                ToolTip="Choose Screenshot..."
+                ToolTip="{x:Static properties:Strings.ImportWindow_ChooseScreenshotTooltip}"
                 Click="ChooseFile_Click">
             <Image Source="Icons/import.png" Stretch="Uniform" />
         </Button>
@@ -40,14 +41,14 @@
                     Visibility="Collapsed" />
 
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
-            <Button Width="32" Height="32" Margin="0,0,8,0" ToolTip="Cancel" Click="Cancel_Click">
+            <Button Width="32" Height="32" Margin="0,0,8,0" ToolTip="{x:Static properties:Strings.Common_CancelTooltip}" Click="Cancel_Click">
                 <Image Source="Icons/cancel.png" Stretch="Uniform" />
             </Button>
             <Button x:Name="ImportButton"
                     Width="32"
                     Height="32"
                     IsEnabled="False"
-                    ToolTip="Import Selected"
+                    ToolTip="{x:Static properties:Strings.ImportWindow_ImportSelectedTooltip}"
                     Click="Import_Click">
                 <Image Source="Icons/save.png" Stretch="Uniform" />
             </Button>

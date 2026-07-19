@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using Microsoft.Win32;
 using TFactor.Models;
+using TFactor.Properties;
 using TFactor.Services;
 using TFactor.ViewModels;
 
@@ -39,8 +40,8 @@ public partial class ImportWindow : Window
         // Let the user pick a file
         OpenFileDialog dialog = new()
         {
-            Filter = "Image files|*.png;*.jpg;*.jpeg;*.bmp;*.gif|All files|*.*",
-            Title = "Choose a QR code screenshot"
+            Filter = Strings.ImportWindow_FileDialogFilter,
+            Title = Strings.ImportWindow_FileDialogTitle
         };
         if (dialog.ShowDialog() != true)
         {
@@ -52,7 +53,7 @@ public partial class ImportWindow : Window
         string? decodedText = QRImageDecoder.DecodeFromFile(dialog.FileName);
         if (decodedText is null)
         {
-            ShowError("No QR code was found in that image.");
+            ShowError(Strings.ImportWindow_NoQrCodeFoundError);
             return;
         }
 
@@ -62,7 +63,7 @@ public partial class ImportWindow : Window
         }
         catch (FormatException)
         {
-            ShowError("That QR code isn't a recognized authenticator export or account code.");
+            ShowError(Strings.ImportWindow_UnrecognizedQrCodeError);
         }
     }
 
@@ -89,7 +90,7 @@ public partial class ImportWindow : Window
 
             if (batch.IsMultiPart)
             {
-                ShowStatus($"This export is split across {batch.BatchSize} QR codes (this is part {batch.BatchIndex + 1}). Choose the next screenshot to add the rest, or click Import to finish with what you have so far.");
+                ShowStatus(string.Format(Strings.ImportWindow_MultiPartStatus, batch.BatchSize, batch.BatchIndex + 1));
             }
         }
         else if (uri.Scheme == "otpauth")
@@ -103,7 +104,7 @@ public partial class ImportWindow : Window
 
         if (accounts.Count == 0)
         {
-            ShowError("No accounts were found in that QR code.");
+            ShowError(Strings.ImportWindow_NoAccountsFoundError);
             return;
         }
 
@@ -115,7 +116,7 @@ public partial class ImportWindow : Window
         }
 
         ImportButton.IsEnabled = _candidates.Count > 0;
-        ChooseFileButton.ToolTip = "Choose Another Screenshot...";
+        ChooseFileButton.ToolTip = Strings.ImportWindow_ChooseAnotherScreenshotTooltip;
     }
 
     /// <summary>

@@ -4,28 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TFactor"
+        xmlns:properties="clr-namespace:TFactor.Properties"
         mc:Ignorable="d"
-        Title="Add Account" Height="440" Width="340"
+        Title="{x:Static properties:Strings.AddAccountWindow_Title}" Height="440" Width="340"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         Background="{StaticResource Brush.Background}">
     <StackPanel Margin="16">
-        <TextBlock Text="Issuer" FontWeight="Bold" Margin="0,0,0,4" />
+        <TextBlock Text="{x:Static properties:Strings.Common_IssuerLabel}" FontWeight="Bold" Margin="0,0,0,4" />
         <TextBox x:Name="IssuerTextBox" Margin="0,0,0,12" />
 
-        <TextBlock Text="Label" FontWeight="Bold" Margin="0,0,0,4" />
+        <TextBlock Text="{x:Static properties:Strings.Common_LabelLabel}" FontWeight="Bold" Margin="0,0,0,4" />
         <TextBox x:Name="LabelTextBox" Margin="0,0,0,12" />
 
-        <TextBlock Text="Secret Key" FontWeight="Bold" Margin="0,0,0,4" />
+        <TextBlock Text="{x:Static properties:Strings.AddAccountWindow_SecretKeyLabel}" FontWeight="Bold" Margin="0,0,0,4" />
         <TextBox x:Name="SecretTextBox" Margin="0,0,0,12" />
 
-        <TextBlock Text="Algorithm" FontWeight="Bold" Margin="0,0,0,4" />
+        <TextBlock Text="{x:Static properties:Strings.AddAccountWindow_AlgorithmLabel}" FontWeight="Bold" Margin="0,0,0,4" />
         <ComboBox x:Name="AlgorithmComboBox" Margin="0,0,0,12" SelectedIndex="0">
             <ComboBoxItem Content="SHA1" />
             <ComboBoxItem Content="SHA256" />
             <ComboBoxItem Content="SHA512" />
         </ComboBox>
 
-        <TextBlock Text="Digits" FontWeight="Bold" Margin="0,0,0,4" />
+        <TextBlock Text="{x:Static properties:Strings.AddAccountWindow_DigitsLabel}" FontWeight="Bold" Margin="0,0,0,4" />
         <ComboBox x:Name="DigitsComboBox" Margin="0,0,0,12" SelectedIndex="0">
             <ComboBoxItem Content="6" />
             <ComboBoxItem Content="8" />
@@ -38,10 +39,10 @@
                     Visibility="Collapsed" />
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Width="32" Height="32" Margin="0,0,8,0" ToolTip="Cancel" Click="Cancel_Click">
+            <Button Width="32" Height="32" Margin="0,0,8,0" ToolTip="{x:Static properties:Strings.Common_CancelTooltip}" Click="Cancel_Click">
                 <Image Source="Icons/cancel.png" Stretch="Uniform" />
             </Button>
-            <Button Width="32" Height="32" ToolTip="Save" Click="Save_Click" IsDefault="True">
+            <Button Width="32" Height="32" ToolTip="{x:Static properties:Strings.Common_SaveTooltip}" Click="Save_Click" IsDefault="True">
                 <Image Source="Icons/save.png" Stretch="Uniform" />
             </Button>
         </StackPanel>

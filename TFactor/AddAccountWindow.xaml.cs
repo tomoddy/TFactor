@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using TFactor.Models;
+using TFactor.Properties;
 using TFactor.Services;
 
 namespace TFactor;
@@ -32,7 +33,7 @@ public partial class AddAccountWindow : Window
         string secret = SecretTextBox.Text.Trim();
         if (string.IsNullOrWhiteSpace(secret))
         {
-            ShowError("Enter the secret key given by the service.");
+            ShowError(Strings.AddAccountWindow_MissingSecretError);
             return;
         }
 
@@ -43,7 +44,7 @@ public partial class AddAccountWindow : Window
         }
         catch (FormatException)
         {
-            ShowError("That doesn't look like a valid secret key.");
+            ShowError(Strings.AddAccountWindow_InvalidSecretError);
             return;
         }
 

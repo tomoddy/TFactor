@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Shared across multiple windows -->
+  <data name="Common_AppTitle" xml:space="preserve">
+    <value>TFactor</value>
+  </data>
+  <data name="Common_IssuerLabel" xml:space="preserve">
+    <value>Issuer</value>
+  </data>
+  <data name="Common_LabelLabel" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="Common_CancelTooltip" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Common_SaveTooltip" xml:space="preserve">
+    <value>Save</value>
+  </data>
+
+  <!-- MainWindow -->
+  <data name="MainWindow_AddAccountTooltip" xml:space="preserve">
+    <value>Add Account</value>
+  </data>
+  <data name="MainWindow_ImportTooltip" xml:space="preserve">
+    <value>Import from Screenshot</value>
+  </data>
+  <data name="MainWindow_EmptyMessage" xml:space="preserve">
+    <value>No accounts yet. Add one, or import from a Google Authenticator screenshot.</value>
+  </data>
+  <data name="MainWindow_CodeTooltip" xml:space="preserve">
+    <value>Click to copy</value>
+  </data>
+  <data name="MainWindow_EditTooltip" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+
+  <!-- AddAccountWindow -->
+  <data name="AddAccountWindow_Title" xml:space="preserve">
+    <value>Add Account</value>
+  </data>
+  <data name="AddAccountWindow_SecretKeyLabel" xml:space="preserve">
+    <value>Secret Key</value>
+  </data>
+  <data name="AddAccountWindow_AlgorithmLabel" xml:space="preserve">
+    <value>Algorithm</value>
+  </data>
+  <data name="AddAccountWindow_DigitsLabel" xml:space="preserve">
+    <value>Digits</value>
+  </data>
+  <data name="AddAccountWindow_MissingSecretError" xml:space="preserve">
+    <value>Enter the secret key given by the service.</value>
+  </data>
+  <data name="AddAccountWindow_InvalidSecretError" xml:space="preserve">
+    <value>That doesn't look like a valid secret key.</value>
+  </data>
+
+  <!-- EditAccountWindow -->
+  <data name="EditAccountWindow_Title" xml:space="preserve">
+    <value>Edit Account</value>
+  </data>
+  <data name="EditAccountWindow_RemoveTooltip" xml:space="preserve">
+    <value>Remove Account</value>
+  </data>
+  <data name="EditAccountWindow_MissingIssuerOrLabelError" xml:space="preserve">
+    <value>Enter an issuer or a label so you can tell this account apart from others.</value>
+  </data>
+  <data name="EditAccountWindow_RemoveConfirmMessage" xml:space="preserve">
+    <value>Remove "{0}"? You'll need to set it up again from the service if you change your mind.</value>
+  </data>
+  <data name="EditAccountWindow_RemoveConfirmTitle" xml:space="preserve">
+    <value>Remove Account</value>
+  </data>
+
+  <!-- ImportWindow -->
+  <data name="ImportWindow_Title" xml:space="preserve">
+    <value>Import from Screenshot</value>
+  </data>
+  <data name="ImportWindow_Instructions" xml:space="preserve">
+    <value>Choose either a single account's QR code or Google Authenticator's 'Transfer accounts' export QR code. If your export used more than one QR code, choose each screenshot in turn - they'll all be added below.</value>
+  </data>
+  <data name="ImportWindow_ChooseScreenshotTooltip" xml:space="preserve">
+    <value>Choose Screenshot...</value>
+  </data>
+  <data name="ImportWindow_ChooseAnotherScreenshotTooltip" xml:space="preserve">
+    <value>Choose Another Screenshot...</value>
+  </data>
+  <data name="ImportWindow_ImportSelectedTooltip" xml:space="preserve">
+    <value>Import Selected</value>
+  </data>
+  <data name="ImportWindow_FileDialogFilter" xml:space="preserve">
+    <value>Image files|*.png;*.jpg;*.jpeg;*.bmp;*.gif|All files|*.*</value>
+  </data>
+  <data name="ImportWindow_FileDialogTitle" xml:space="preserve">
+    <value>Choose a QR code screenshot</value>
+  </data>
+  <data name="ImportWindow_NoQrCodeFoundError" xml:space="preserve">
+    <value>No QR code was found in that image.</value>
+  </data>
+  <data name="ImportWindow_UnrecognizedQrCodeError" xml:space="preserve">
+    <value>That QR code isn't a recognized authenticator export or account code.</value>
+  </data>
+  <data name="ImportWindow_MultiPartStatus" xml:space="preserve">
+    <value>This export is split across {0} QR codes (this is part {1}). Choose the next screenshot to add the rest, or click Import to finish with what you have so far.</value>
+  </data>
+  <data name="ImportWindow_NoAccountsFoundError" xml:space="preserve">
+    <value>No accounts were found in that QR code.</value>
+  </data>
+
+  <!-- App -->
+  <data name="App_WindowsHelloPrompt" xml:space="preserve">
+    <value>Unlock TFactor to view your authentication codes.</value>
+  </data>
+  <data name="App_VerificationFailedMessage" xml:space="preserve">
+    <value>Verification was cancelled or didn't succeed. Try again?</value>
+  </data>
+</root>

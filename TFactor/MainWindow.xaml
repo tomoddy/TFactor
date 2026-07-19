@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TFactor"
+        xmlns:properties="clr-namespace:TFactor.Properties"
         mc:Ignorable="d"
-        Title="TFactor" Height="760" Width="280" MinWidth="280" MaxWidth="280"
+        Title="{x:Static properties:Strings.Common_AppTitle}" Height="760" Width="280" MinWidth="280" MaxWidth="280"
         ResizeMode="CanResize"
         Icon="Icons/icon.ico"
         Background="{StaticResource Brush.Background}">
@@ -16,11 +17,11 @@
                     Width="32"
                     Height="32"
                     Margin="0,0,8,0"
-                    ToolTip="Add Account"
+                    ToolTip="{x:Static properties:Strings.MainWindow_AddAccountTooltip}"
                     Click="AddAccount_Click">
                 <Image Source="Icons/add.png" Stretch="Uniform" />
             </Button>
-            <Button x:Name="ImportButton" DockPanel.Dock="Left" Width="32" Height="32" Margin="0,0,8,0" ToolTip="Import from Screenshot" Click="ImportFromScreenshot_Click">
+            <Button x:Name="ImportButton" DockPanel.Dock="Left" Width="32" Height="32" Margin="0,0,8,0" ToolTip="{x:Static properties:Strings.MainWindow_ImportTooltip}" Click="ImportFromScreenshot_Click">
                 <Image Source="Icons/import.png" Stretch="Uniform" />
             </Button>
 
@@ -36,7 +37,7 @@
 
         <TextBlock x:Name="EmptyMessage"
                     DockPanel.Dock="Bottom"
-                    Text="No accounts yet. Add one, or import from a Google Authenticator screenshot."
+                    Text="{x:Static properties:Strings.MainWindow_EmptyMessage}"
                     TextWrapping="Wrap"
                     Foreground="{StaticResource Brush.TextSecondary}"
                     HorizontalAlignment="Center"
@@ -62,7 +63,7 @@
                                 <Button Margin="0,4,0,0"
                                         Padding="6,2"
                                         HorizontalAlignment="Left"
-                                        ToolTip="Click to copy"
+                                        ToolTip="{x:Static properties:Strings.MainWindow_CodeTooltip}"
                                         Click="Code_Click">
                                     <TextBlock Text="{Binding Code}"
                                                FontSize="26"
@@ -81,7 +82,7 @@
                                         Click="EditAccount_Click"
                                         Margin="0,6,0,0"
                                         HorizontalAlignment="Center"
-                                        ToolTip="Edit">
+                                        ToolTip="{x:Static properties:Strings.MainWindow_EditTooltip}">
                                     <Image Source="Icons/edit.png" Stretch="Uniform" />
                                 </Button>
                             </StackPanel>

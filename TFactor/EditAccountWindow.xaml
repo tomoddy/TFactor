@@ -4,15 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TFactor"
+        xmlns:properties="clr-namespace:TFactor.Properties"
         mc:Ignorable="d"
-        Title="Edit Account" Height="250" Width="340"
+        Title="{x:Static properties:Strings.EditAccountWindow_Title}" Height="250" Width="340"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         Background="{StaticResource Brush.Background}">
     <StackPanel Margin="16">
-        <TextBlock Text="Issuer" FontWeight="Bold" Margin="0,0,0,4" />
+        <TextBlock Text="{x:Static properties:Strings.Common_IssuerLabel}" FontWeight="Bold" Margin="0,0,0,4" />
         <TextBox x:Name="IssuerTextBox" Margin="0,0,0,12" />
 
-        <TextBlock Text="Label" FontWeight="Bold" Margin="0,0,0,4" />
+        <TextBlock Text="{x:Static properties:Strings.Common_LabelLabel}" FontWeight="Bold" Margin="0,0,0,4" />
         <TextBox x:Name="LabelTextBox" Margin="0,0,0,12" />
 
         <TextBlock x:Name="ErrorTextBlock"
@@ -31,16 +32,16 @@
                     Width="32"
                     Height="32"
                     HorizontalAlignment="Left"
-                    ToolTip="Remove Account"
+                    ToolTip="{x:Static properties:Strings.EditAccountWindow_RemoveTooltip}"
                     Click="Remove_Click">
                 <Image Source="Icons/delete.png" Stretch="Uniform" />
             </Button>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button Width="32" Height="32" Margin="0,0,8,0" ToolTip="Cancel" Click="Cancel_Click">
+                <Button Width="32" Height="32" Margin="0,0,8,0" ToolTip="{x:Static properties:Strings.Common_CancelTooltip}" Click="Cancel_Click">
                     <Image Source="Icons/cancel.png" Stretch="Uniform" />
                 </Button>
-                <Button Width="32" Height="32" ToolTip="Save" Click="Save_Click" IsDefault="True">
+                <Button Width="32" Height="32" ToolTip="{x:Static properties:Strings.Common_SaveTooltip}" Click="Save_Click" IsDefault="True">
                     <Image Source="Icons/save.png" Stretch="Uniform" />
                 </Button>
             </StackPanel>

@@ -1,5 +1,6 @@
 using System.Windows;
 using TFactor.Models;
+using TFactor.Properties;
 
 namespace TFactor;
 
@@ -39,7 +40,7 @@ public partial class EditAccountWindow : Window
         string label = LabelTextBox.Text.Trim();
         if (string.IsNullOrWhiteSpace(issuer) && string.IsNullOrWhiteSpace(label))
         {
-            ShowError("Enter an issuer or a label so you can tell this account apart from others.");
+            ShowError(Strings.EditAccountWindow_MissingIssuerOrLabelError);
             return;
         }
         _account.Issuer = issuer;
@@ -53,7 +54,7 @@ public partial class EditAccountWindow : Window
     private void Remove_Click(object sender, RoutedEventArgs e)
     {
         string name = string.IsNullOrWhiteSpace(_account.Issuer) ? _account.Label : _account.Issuer;
-        MessageBoxResult confirmation = MessageBox.Show(this, $"Remove \"{name}\"? You'll need to set it up again from the service if you change your mind.", "Remove Account", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        MessageBoxResult confirmation = MessageBox.Show(this, string.Format(Strings.EditAccountWindow_RemoveConfirmMessage, name), Strings.EditAccountWindow_RemoveConfirmTitle, MessageBoxButton.YesNo, MessageBoxImage.Warning);
         if (confirmation != MessageBoxResult.Yes)
         {
             return;

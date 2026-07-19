@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Media;
+using TFactor.Properties;
 using TFactor.Services;
 
 namespace TFactor;
@@ -29,9 +30,9 @@ public partial class App : Application
         ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
         // Keep prompting the user until they either verify successfully or decline to retry
-        while (!await WindowsHelloAuth.VerifyAsync("Unlock TFactor to view your authentication codes."))
+        while (!await WindowsHelloAuth.VerifyAsync(Strings.App_WindowsHelloPrompt))
         {
-            MessageBoxResult retry = MessageBox.Show("Verification was cancelled or didn't succeed. Try again?", "TFactor",MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult retry = MessageBox.Show(Strings.App_VerificationFailedMessage, Strings.Common_AppTitle, MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (retry != MessageBoxResult.Yes)
             {
                 Shutdown();
