@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TFactor"
         xmlns:properties="clr-namespace:TFactor.Properties"
         mc:Ignorable="d"
-        Title="{x:Static properties:Strings.Common_AppTitle}" Height="760" Width="280" MinWidth="280" MaxWidth="280"
+        Title="{x:Static properties:Strings.Common_AppTitle}" Height="780" Width="280" MinWidth="280" MaxWidth="280"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
         Icon="Icons/icon.ico"
